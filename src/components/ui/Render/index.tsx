@@ -15,7 +15,7 @@ import hotkeys from "hotkeys-js";
 import getter from "lodash.get";
 import pretty from "pretty";
 import { PropsTable } from "@csod-oss/react-props-to-docs-ts";
-import { RenderComponentProps } from "docz-playground";
+import { RenderComponentProps } from "@csod-oss/docz-playground";
 
 import { Handle, HANDLE_SIZE } from "./Handle";
 import { ResizeBar } from "./ResizeBar";
@@ -154,6 +154,23 @@ const Container = styled("div")`
   border: 1px solid #ced4de;
   padding: 10px;
 `;
+
+const VariationsList = styled("ul")`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+`
+
+const VariationsItem = styled("li")``
+
+const VariationsButton = styled("button")`
+  border: none;
+  color: #00B9E4;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  background-color: transparent;
+`
 
 const storage = localStorage();
 const get = (pos: number): any => storage.get(pos.toString());
@@ -340,7 +357,7 @@ export class Render extends Component<RenderComponentProps, RenderState> {
               {this.actions}
               {showing === "variations" && (
                 <Container>
-                  <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
+                  <VariationsList>
                     {variations &&
                       variations.map(
                         (
@@ -348,26 +365,15 @@ export class Render extends Component<RenderComponentProps, RenderState> {
                           index: number
                         ) => {
                           return (
-                            <li key={index}>
-                              <button
-                                style={{
-                                  border: "none",
-                                  color: "#00B9E4",
-                                  fontWeight: 600,
-                                  textDecoration: "underline",
-                                  cursor: "pointer"
-                                }}
-                                onClick={() => {
-                                  this.setVariation(variation.component);
-                                }}
-                              >
+                            <VariationsItem key={index}>
+                              <VariationsButton onClick={() => { this.setVariation(variation.component);}}>
                                 {variation.name}
-                              </button>
-                            </li>
+                              </VariationsButton>
+                            </VariationsItem>
                           );
                         }
                       )}
-                  </ul>
+                  </VariationsList>
                 </Container>
               )}
               {showing === "props" &&

@@ -1,12 +1,13 @@
 {
-  "name": "csod-docz-theme",
-  "version": "1.0.0",
+  "name": "@csod-oss/docz-theme",
+  "version": "0.0.1",
   "description": "CSOD Docz custom theme",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
   "module": "dist/index.m.js",
   "source": "src/index.tsx",
   "scripts": {
+    "start": "docz dev",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack --progress --colors --watch",
     "fix": "run-s fix:*",
@@ -19,23 +20,15 @@
     "package.json",
     "README.md"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/csod-oss/docz-theme.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/csod-oss/docz-theme/issues"
-  },
-  "homepage": "https://github.com/csod-oss/docz-theme#readme",
   "dependencies": {
+    "@csod-oss/docz-playground": "0.0.1",
     "@csod-oss/react-props-to-docs-ts": "0.0.8",
     "codemirror": "^5.40.0",
     "copy-text-to-clipboard": "^1.0.4",
     "docz": "^0.12.5",
-    "docz-playground": "0.0.1",
     "emotion": "^9.2.9",
     "emotion-theming": "^9.2.9",
     "facepaint": "^1.2.1",
