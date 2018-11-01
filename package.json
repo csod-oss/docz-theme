@@ -1,6 +1,6 @@
 {
   "name": "@csod-oss/docz-theme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CSOD Docz custom theme",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
@@ -28,7 +28,7 @@
     "@csod-oss/react-props-to-docs-ts": "0.0.8",
     "codemirror": "^5.40.0",
     "copy-text-to-clipboard": "^1.0.4",
-    "docz": "^0.12.5",
+    "docz": "0.12.5",
     "emotion": "^9.2.9",
     "emotion-theming": "^9.2.9",
     "facepaint": "^1.2.1",
