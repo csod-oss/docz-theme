@@ -66,3 +66,5 @@ const transform = ({ mode, codemirrorTheme, ...config }: any) => {
 };
 
 export default theme(config, transform)(Theme);
+
+export { components };
