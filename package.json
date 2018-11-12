@@ -1,6 +1,6 @@
 {
   "name": "@csod-oss/docz-theme",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "CSOD Docz custom theme",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
