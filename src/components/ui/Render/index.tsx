@@ -1,7 +1,6 @@
 import * as React from "react";
 import { SFC, Fragment, Component } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { ThemeConfig } from "docz";
 import { LiveProvider, LiveError, LivePreview } from "react-live";
 import styled, { css } from "react-emotion";
 import lighten from "polished/lib/color/lighten";
@@ -20,7 +19,6 @@ import { RenderComponentProps } from "@csod-oss/docz-playground";
 import { Handle, HANDLE_SIZE } from "./Handle";
 import { ResizeBar } from "./ResizeBar";
 import { LiveConsumer } from "./LiveConsumer";
-import { CodeSandboxLogo } from "./CodeSandboxLogo";
 import { ActionButton, ClipboardAction, Editor as PreBase } from "../Editor";
 
 import { localStorage } from "@utils/local-storage";
@@ -117,8 +115,6 @@ const actionClass = (p: any) => css`
 const Action = styled(ActionButton)`
   ${actionClass};
 `;
-
-const ActionLink = Action.withComponent("a");
 
 const Clipboard = styled(ClipboardAction)`
   ${actionClass};
@@ -229,12 +225,11 @@ export class Render extends Component<RenderComponentProps, RenderState> {
 
   get actions(): JSX.Element {
     const { showing, fullscreen } = this.state;
-    const { codesandbox, variations, propsTable } = this.props;
+    const { variations, propsTable } = this.props;
 
     const showVariations = this.handleShow("variations");
     const showProps = this.handleShow("props");
     const showJsx = this.handleShow("jsx");
-    const showHtml = this.handleShow("html");
 
     return (
       <Actions>
@@ -250,28 +245,12 @@ export class Render extends Component<RenderComponentProps, RenderState> {
             </Tab>
           )}
           <Tab active={showing === "jsx"} onClick={showJsx}>
-            JSX
-          </Tab>
-          <Tab active={showing === "html"} onClick={showHtml}>
-            HTML
+            CODE
           </Tab>
         </Tabs>
         <Action onClick={this.handleRefresh} title="Refresh playground">
           <Refresh width={15} />
         </Action>
-        {codesandbox !== "undefined" && (
-          <ThemeConfig>
-            {config => (
-              <ActionLink
-                href={this.codesandboxUrl(config.native)}
-                target="_blank"
-                title="Open in CodeSandbox"
-              >
-                <CodeSandboxLogo style={{ height: "100%" }} width={15} />
-              </ActionLink>
-            )}
-          </ThemeConfig>
-        )}
         <Clipboard content={showing === "jsx" ? this.state.code : this.html} />
         <Action
           onClick={this.handleToggle}
@@ -387,15 +366,6 @@ export class Render extends Component<RenderComponentProps, RenderState> {
                   {this.state.code}
                 </Jsx>
               )}
-              {showing === "html" && (
-                <Pre
-                  className={editorClassName}
-                  actions={<Fragment />}
-                  withLastLine
-                >
-                  {this.html}
-                </Pre>
-              )}
             </Wrapper>
           </Resizable>
         </Overlay>
@@ -469,11 +439,4 @@ export class Render extends Component<RenderComponentProps, RenderState> {
       render(<App>${code}</App>)
     `;
   }
-
-  private codesandboxUrl = (native: boolean): string => {
-    const { codesandbox } = this.props;
-    const url = "https://codesandbox.io/api/v1/sandboxes/define";
-
-    return `${url}?parameters=${codesandbox}${native ? `&editorsize=75` : ``}`;
-  };
 }
